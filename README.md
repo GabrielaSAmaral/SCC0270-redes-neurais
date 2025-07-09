@@ -174,7 +174,7 @@ Não observamos melhoras significativas com o aumento do número de epochs acima
 
 O objetivo do Projeto 02 foi desenvolver um classificador de **Localidade Anatômica** utilizando uma abordagem **multimodal**, combinando informações visuais (imagem médica) e textuais (legenda associada) por meio do modelo **CLIP (Contrastive Language-Image Pretraining)** da OpenAI.
 
-Inicialmente, um dataset customizado foi criado a partir dos arquivos JSON da MedPix 2.0, contendo a associação entre imagem, legenda (`Caption`) e localização anatômica (`Location`). Os dados foram processados e divididos em conjuntos de treino e teste, com as imagens sendo carregadas e processadas juntamente com os textos utilizando o `CLIPProcessor`.
+Inicialmente, um dataset customizado foi criado a partir dos arquivos JSON da MedPix 2.0, contendo a associação entre imagem, legenda (`Caption`) e localização anatômica (`Location`). Os dados foram processados e divididos em conjuntos de treino e teste, com as imagens sendo carregadas e processadas juntamente com os textos utilizando o `CLIPProcessor`. O código do treinamento pode ser acessado no seguinte notebook no Colab [Notebook com treino do CLIP para Modalidade no Colab](https://colab.research.google.com/drive/1LqGHXRNEwuTu8tcZP0jmpvhhN7siQJ8O?usp=sharing).
 
 O modelo foi construído em duas etapas:
 
