@@ -1,101 +1,101 @@
-# 🧠 SCC0270 - Redes Neurais
+# 🧠 SCC0270 - Neural Networks
 
-Repositório com os projetos da disciplina **SCC0270 - Redes Neurais e Aprendizado Profundo**, oferecida pelo ICMC - USP São Carlos, 2025.
+Repository containing projects for the course **SCC0270 - Neural Networks and Deep Learning**, offered by ICMC - USP São Carlos, 2025.
 
-## 🔧 Configuração do Ambiente
+## 🔧 Environment Setup
 
-Este projeto utiliza o gerenciador de ambientes e dependências [`uv`](https://github.com/astral-sh/uv).  
-Para configurar o ambiente corretamente, siga os passos abaixo:
+This project uses the [`uv`](https://github.com/astral-sh/uv) environment and dependency manager.  
+To set up the environment correctly, follow the steps below:
 
-### 1. Instale o `uv`
+### 1. Install `uv`
 
-Se ainda não tiver o `uv` instalado, execute:
+If you don't have `uv` installed yet, run:
 
 ```bash
 curl -Ls https://astral.sh/uv/install.sh | bash
 ```
 
-### 2. Crie e sincronize o ambiente virtual
+### 2. Create and sync the virtual environment
 
-Para criar um ambiente virtual e instalar todas as dependências listadas no `pyproject.toml`, execute:
+To create a virtual environment and install all dependencies listed in `pyproject.toml`, run:
 
 ```bash
 uv sync
 ```
 
-Este comando cria automaticamente o ambiente virtual e instala as bibliotecas necessárias.
+This command automatically creates the virtual environment and installs the necessary libraries.
 
 ---
 
-## 📂 Organização do Repositório
+## 📂 Repository Organization
 
-- `data/` — 📦 Dados utilizados nos projetos  
-- `notebooks/` — 📒 Notebooks de desenvolvimento e análise  
-- `model/` - 🔧 Modelos ResNet50
-- `posters/` — 🖼️ Material gráfico (pôsteres e apresentações)  
-- `assets/` — 📁 Arquivos auxiliares como imagens usadas no README  
+- `data/` — 📦 Data used in projects  
+- `notebooks/` — 📒 Development and analysis notebooks  
+- `model/` - 🔧 ResNet50 models
+- `posters/` — 🖼️ Graphic materials (posters and presentations)  
+- `assets/` — 📁 Auxiliary files such as images used in README  
 
 ---
 
-# Projetos
+# Projects
 
-Os projetos são baseados no seguinte paper ["MedPix 2.0: A Comprehensive Multimodal Biomedical Dataset for Advanced AI Applications"](https://arxiv.org/html/2407.02994v1#S3)
+The projects are based on the following paper: ["MedPix 2.0: A Comprehensive Multimodal Biomedical Dataset for Advanced AI Applications"](https://arxiv.org/html/2407.02994v1#S3)
 
-O objetivo dos autores foi construir um conjunto de dados melhor estruturado com imagens médicas e informações clínicas associadas a cada imagem a fim de disponibilizar uma fonte de dados para que pesquisadores e profissionais da saúde possam, a partir desses dados, construir soluções de IA para a área médica uma vez que um conjunto de dados padronizado está disponível.
+The authors' goal was to build a better-structured dataset with medical images and clinical information associated with each image in order to provide a data source so that researchers and healthcare professionals can build AI solutions for the medical field, given that a standardized dataset is available.
 
-A principal motivação dos autores deve-se ao fato de que a maioria dos dados médicos são privados e, até a publicação do trabalho, inexistiam conjuntos de dados médicos abertos cuja estrutura permitisse o desenvolvimento de soluções baseadas em IA.
+The authors' main motivation stems from the fact that most medical data is private and, until the publication of the work, there were no open medical datasets whose structure allowed for the development of AI-based solutions.
 
-## Dados (MedPix 2.0)
+## Data (MedPix 2.0)
 
-Este projeto utiliza o conjunto de dados **MedPix 2.0**, uma base de dados biomédica multimodal abrangente e de alta qualidade, desenvolvida para aplicações avançadas de Inteligência Artificial (IA) no domínio médico. Originária da conhecida base de dados MedPix® (utilizada para Educação Médica Continuada), a MedPix 2.0 foi criada para superar a escassez de datasets médicos de alta qualidade e de acesso público, especialmente para o desenvolvimento de Modelos de Linguagem de Grande Porte Multimodais (MLLM).
+This project uses the **MedPix 2.0** dataset, a comprehensive, high-quality multimodal biomedical database developed for advanced Artificial Intelligence (AI) applications in the medical domain. Originating from the well-known MedPix® database (used for Continuing Medical Education), MedPix 2.0 was created to overcome the scarcity of high-quality, publicly accessible medical datasets, especially for the development of Multimodal Large Language Models (MLLM).
 
-A construção do MedPix 2.0 envolveu um **pipeline semi-automático para a extração de dados visuais e textuais**, seguido por um **processo de curadoria manual** para remover amostras ruidosas. Os dados são armazenados em uma **base de dados não-relacional MongoDB**, que reorganiza a estrutura do MedPix® original, tornando-a mais acessível e estruturada para aplicações de IA.
+The construction of MedPix 2.0 involved a **semi-automatic pipeline for extracting visual and textual data**, followed by a **manual curation process** to remove noisy samples. The data is stored in a **non-relational MongoDB database**, which reorganizes the original MedPix® structure, making it more accessible and structured for AI applications.
 
-### Estrutura dos Dados
+### Data Structure
 
-A MedPix 2.0 integra **dados visuais (scans de Tomografia Computadorizada - TC e Ressonância Magnética - RM)** e **dados textuais (relatórios clínicos e achados)**. Cada caso clínico dentro do dataset contém ao menos uma imagem médica e as informações correspondentes, como achados, notas de discussão, diagnóstico, diagnóstico diferencial, tratamento e acompanhamento, todas apresentadas em um formato semi-estruturado JSON.
+MedPix 2.0 integrates **visual data (Computed Tomography - CT and Magnetic Resonance - MR scans)** and **textual data (clinical reports and findings)**. Each clinical case within the dataset contains at least one medical image and corresponding information, such as findings, discussion notes, diagnosis, differential diagnosis, treatment and follow-up, all presented in a semi-structured JSON format.
 
-Na implementação do MongoDB, os dados são organizados em duas coleções principais:
+In the MongoDB implementation, the data is organized into two main collections:
 
-- **`Image_Descriptions`**: Contém **documentos de descrição (`descriptions documents`)**, que armazenam informações estritamente conectadas às imagens. Estes documentos incluem detalhes como a modalidade do exame (CT ou MR) e a parte do corpo (Location).
-- **`Clinical_reports`**: Contém **documentos de caso-tópico (`case-topic documents`)**, que agrupam informações detalhadas de um caso clínico completo, incluindo explicações acadêmicas e gerais sobre a doença investigada.
+- **`Image_Descriptions`**: Contains **description documents**, which store information strictly connected to the images. These documents include details such as the examination modality (CT or MR) and body part (Location).
+- **`Clinical_reports`**: Contains **case-topic documents**, which group detailed information from a complete clinical case, including academic and general explanations about the investigated disease.
 
-Existe uma relação de um-para-muitos entre os casos clínicos e as imagens, onde o identificador único (`U_id`) de um documento de caso-tópico é incorporado em cada documento de descrição de imagem a ele relacionado. As imagens em si são armazenadas na pasta `MedPix-2.0/images/` e acessadas via URL.
+There is a one-to-many relationship between clinical cases and images, where the unique identifier (`U_id`) of a case-topic document is embedded in each related image description document. The images themselves are stored in the `MedPix-2.0/images/` folder and accessed via URL.
 
-### Divisão e Acesso aos Dados no Projeto
+### Data Split and Access in the Project
 
-Para este projeto, um subconjunto dos dados da MedPix 2.0 foi dividido em **conjuntos de treinamento e teste** e estão presentes na pasta `MedPix-2.0/splitted_dataset/`. Os dados são fornecidos em arquivos JSON, que seguem a estrutura dos documentos descritos acima. Exemplos desses arquivos incluem:
+For this project, a subset of MedPix 2.0 data was divided into **training and test sets** and is present in the `MedPix-2.0/splitted_dataset/` folder. The data is provided in JSON files, which follow the structure of the documents described above. Examples of these files include:
 
-- **`descriptions_train.jsonl`**: Documentos de descrição para o conjunto de treinamento.
-- **`data_train.jsonl`**: Documentos de caso-tópico para o conjunto de treinamento.
-- **`descriptions_test.jsonl`**: Documentos de descrição para o conjunto de teste.
-- **`data_test.jsonl`**: Documentos de caso-tópico para o conjunto de teste.
+- **`descriptions_train.jsonl`**: Description documents for the training set.
+- **`data_train.jsonl`**: Case-topic documents for the training set.
+- **`descriptions_test.jsonl`**: Description documents for the test set.
+- **`data_test.jsonl`**: Case-topic documents for the test set.
 
-Essa estruturação de dados facilita o uso direto para o treinamento e fine-tuning de modelos de Machine Learning e Deep Learning, sem a necessidade de pré-processamento adicional para tarefas multimodais. A base de dados MedPix 2.0, com sua curadoria e estruturação, é um ponto de partida relevante para o desenvolvimento de sistemas de IA multimodal no domínio médico, incluindo sistemas de extração de informação, análise automatizada de imagens e modelos de IA generativa para relatórios clínicos.
+This data structuring facilitates direct use for training and fine-tuning Machine Learning and Deep Learning models, without the need for additional preprocessing for multimodal tasks. The MedPix 2.0 database, with its curation and structuring, is a relevant starting point for developing multimodal AI systems in the medical domain, including information extraction systems, automated image analysis, and generative AI models for clinical reports.
 
-O código-fonte do projeto e os dados utilizados para teste e treinamento estão **disponíveis gratuitamente** nos repositórios públicos indicados no artigo original.
+The project source code and the data used for testing and training are **freely available** in the public repositories indicated in the original article.
 
-## 🚀 Projeto 01
+## 🚀 Project 01
 
-📅 **Prazo:** 21/06/2025  
+📅 **Deadline:** June 21, 2025  
 
-**Tarefas:**  
+**Tasks:**  
 
-- 🔍 Classificador binário de **Modalidade** (`CT` ou `MR`)  
-- 🧠 Classificador multi-classe de **Localidade** (21 classes)  
+- 🔍 Binary classifier for **Modality** (`CT` or `MR`)  
+- 🧠 Multi-class classifier for **Location** (21 classes)  
 
-O objetivo do Projeto 01 é construir um classificador binário capaz de classificar as imagens como `CT` (Tomografia Computadorizada) ou `MR` (Ressonância Magnética) e também um classificador multi-classe para classificar as Localidades associadas a cada imagem. São 21 Localidades disponíveis: `Chest, Pulmonary`, `Genitourinary`, `Head and Neck`, `Cardiovascular`, `Brain and Neuro`, `Abdomen`, `Spine`, `Eye and Orbit`, `Gastrointestinal`, `Vascular`, `Endocrine`, `Musculoskeletal`, `Pathology`, `Generalized`, `Hematopoietic`, `Dental, Oral, or Tooth`, `Nerve, central`, `Breast and Mammography`, `Bethesda, MD`, `Ophthalmology`, `Nerve, peripheral`.
+The objective of Project 01 is to build a binary classifier capable of classifying images as `CT` (Computed Tomography) or `MR` (Magnetic Resonance) and also a multi-class classifier to classify the Locations associated with each image. There are 21 available Locations: `Chest, Pulmonary`, `Genitourinary`, `Head and Neck`, `Cardiovascular`, `Brain and Neuro`, `Abdomen`, `Spine`, `Eye and Orbit`, `Gastrointestinal`, `Vascular`, `Endocrine`, `Musculoskeletal`, `Pathology`, `Generalized`, `Hematopoietic`, `Dental, Oral, or Tooth`, `Nerve, central`, `Breast and Mammography`, `Bethesda, MD`, `Ophthalmology`, `Nerve, peripheral`.
 
-De início, no notebook `Trabalho_01_ML.ipynb` foram construídos modelos de ML clássicos baseados em técnicas de extração de características como Descritores de Texturas e Cores e em seguida, ajustou-se um KNN.
-No notebook presente no Colab no seguinte [Notebook com treino da CNN para Modalidade no Colab](https://drive.google.com/drive/folders/1nnpJwP1hIiqQjFYWDabOCFGvpeqj7dPg?usp=drive_link) fez-se o fine-tuning de uma ResNet50 para a classificação da modalidade e no notebook [Notebook com treino da CNN para Localidade no Colab](https://colab.research.google.com/drive/1X9ANeqFUI9rEleWq8OYalE2q5EnB3cQ_?usp=drive_link) fez-se o fine-tuning de uma ResNet50 para a classificação da localidade.
+Initially, in the `Trabalho_01_ML.ipynb` notebook, classic ML models were built based on feature extraction techniques such as Texture and Color Descriptors, followed by KNN fitting.
+In the notebook available on Colab at [CNN Training Notebook for Modality on Colab](https://drive.google.com/drive/folders/1nnpJwP1hIiqQjFYWDabOCFGvpeqj7dPg?usp=drive_link), fine-tuning of a ResNet50 for modality classification was performed, and in the notebook [CNN Training Notebook for Location on Colab](https://colab.research.google.com/drive/1X9ANeqFUI9rEleWq8OYalE2q5EnB3cQ_?usp=drive_link), fine-tuning of a ResNet50 for location classification was performed.
 
-O código para carregamento do modelo treinado e cálculo das métricas de avaliação estão presentes no notebook `Trabalho_01_CNN.ipynb`.
+The code for loading the trained model and calculating evaluation metrics is present in the `Trabalho_01_CNN.ipynb` notebook.
 
-Obtivemos os seguintes resultados na tarefa de classificação binária:
+We obtained the following results in the binary classification task:
 
-## Resultados Classificação da Modalidade
+## Modality Classification Results
 
-### KNN + Descritores de Textura
+### KNN + Texture Descriptors
 
 | Class        | Precision | Recall | F1-Score | Support |
 |--------------|-----------|--------|----------|---------|
@@ -105,7 +105,7 @@ Obtivemos os seguintes resultados na tarefa de classificação binária:
 | **Macro Avg**| 0.25      | 0.50   | 0.33     | 200     |
 | **Weighted Avg** | 0.25  | 0.50   | 0.33     | 200     |
 
-### KNN + Descritores de Imagem
+### KNN + Image Descriptors
 
 | Class          | Precision | Recall | F1-Score | Support |
 |----------------|-----------|--------|----------|---------|
@@ -115,7 +115,7 @@ Obtivemos os seguintes resultados na tarefa de classificação binária:
 | **Macro Avg**  | 0.61      | 0.61   | 0.61     | 200     |
 | **Weighted Avg**| 0.61     | 0.61   | 0.61     | 200     |
 
-### KNN + Descritores de Textura + Imagem
+### KNN + Texture + Image Descriptors
 
 | Class           | Precision | Recall | F1-Score | Support |
 |-----------------|-----------|--------|----------|---------|
@@ -135,10 +135,10 @@ Obtivemos os seguintes resultados na tarefa de classificação binária:
 | **Macro Avg**    | 0.99      | 0.98   | 0.98     | 200     |
 | **Weighted Avg** | 0.99      | 0.98   | 0.98     | 200     |
 
-## Resultados Classificação da Localidade (ResNet50 - 02 Epochs)
+## Location Classification Results (ResNet50 - 02 Epochs)
 
-Métodos de ML com descritores de textura e cores não foram capazes de classificar a Localidade das imagens.
-Foi treinado, do mesmo modo, uma ResNet50 para a classificação das 21 localidades.
+ML methods with texture and color descriptors were not able to classify the Location of the images.
+Similarly, a ResNet50 was trained for the classification of 21 locations.
 
 | Label                  | Precision | Recall | F1-Score | Support |
 |------------------------|-----------|--------|----------|---------|
@@ -160,49 +160,49 @@ Foi treinado, do mesmo modo, uma ResNet50 para a classificação das 21 localida
 | **Macro Avg**          | 0.36      | 0.31   | 0.31     | 200     |
 | **Weighted Avg**       | 0.58      | 0.57   | 0.54     | 200     |
 
-Obtivemos uma **acurácia de 57%** que é ligeiramente superior à reportada pelos autores de 52.5%.  
-Como nem todas as classes estão presentes no conjunto de teste, a tabela acima não apresenta todas as classes.
-Percebe-se que as Localidades com menos exemplos disponíveis no conjunto de treinamento apresentam menores valores de acurácia, o que é o esperado.
-Não observamos melhoras significativas com o aumento do número de epochs acima de 2.
+We obtained an **accuracy of 57%** which is slightly higher than the 52.5% reported by the authors.  
+Since not all classes are present in the test set, the table above does not show all classes.
+It can be observed that Locations with fewer examples available in the training set show lower accuracy values, which is expected.
+We did not observe significant improvements with increasing the number of epochs beyond 2.
 
 ---
 
-## 🚧 Projeto 02
+## 🚧 Project 02
 
-🗓️ **Prazo:** 09/07/2025\
-🔄 **Classificador Multimodal com CLIP**
+🗓️ **Deadline:** July 09, 2025\
+🔄 **Multimodal Classifier with CLIP**
 
-O objetivo do Projeto 02 foi desenvolver um classificador de **Localidade Anatômica** utilizando uma abordagem **multimodal**, combinando informações visuais (imagem médica) e textuais (legenda associada) por meio do modelo **CLIP (Contrastive Language-Image Pretraining)** da OpenAI.
+The objective of Project 02 was to develop an **Anatomical Location** classifier using a **multimodal** approach, combining visual information (medical image) and textual information (associated caption) through OpenAI's **CLIP (Contrastive Language-Image Pretraining)** model.
 
-Inicialmente, um dataset customizado foi criado a partir dos arquivos JSON da MedPix 2.0, contendo a associação entre imagem, legenda (`Caption`) e localização anatômica (`Location`). Os dados foram processados e divididos em conjuntos de treino e teste, com as imagens sendo carregadas e processadas juntamente com os textos utilizando o `CLIPProcessor`. O código do treinamento pode ser acessado no seguinte notebook no Colab [Notebook com treino do CLIP para Multimodalidade](https://colab.research.google.com/drive/1LqGHXRNEwuTu8tcZP0jmpvhhN7siQJ8O?usp=sharing).
+Initially, a custom dataset was created from the MedPix 2.0 JSON files, containing the association between image, caption (`Caption`) and anatomical location (`Location`). The data was processed and divided into training and test sets, with images being loaded and processed along with texts using the `CLIPProcessor`. The training code can be accessed in the following Colab notebook [CLIP Training Notebook for Multimodality](https://colab.research.google.com/drive/1LqGHXRNEwuTu8tcZP0jmpvhhN7siQJ8O?usp=sharing).
 
-O modelo foi construído em duas etapas:
+The model was built in two stages:
 
-- Extração dos **embeddings** de imagem e texto via modelo pré-treinado `clip-vit-base-patch32`;
-- Treinamento de um **classificador simples** com camadas lineares sobre a concatenação dos embeddings.
-
----
-
-### 📈 Curvas de Treinamento
-
-Durante as 30 épocas, observou-se uma **queda consistente nas perdas de treino e validação**, sem sinais de overfitting.
-
-| Época | Loss Treino | Loss Validação |
-| ----- | ----------- | -------------- |
-| 1     | 2.7800      | 2.4204         |
-| 10    | 1.3309      | 1.3012         |
-| 20    | 1.0183      | 1.0025         |
-| 30    | 0.8183      | 0.8064         |
-
-> 🔍 A diferença entre as curvas foi pequena durante todo o treinamento, indicando boa generalização. Mesmo após 30 épocas, ambas ainda apresentam tendência de queda.
+- Extraction of image and text **embeddings** via the pre-trained model `clip-vit-base-patch32`;
+- Training a **simple classifier** with linear layers on top of the concatenated embeddings.
 
 ---
 
-### 📋 Resultados por Classe (classification\_report)
+### 📈 Training Curves
 
-O modelo alcançou uma **acurácia total de 78%**, superando a baseline de 52.5% reportada no artigo original. Abaixo estão os principais resultados por classe:
+During the 30 epochs, a **consistent decrease in training and validation losses** was observed, without signs of overfitting.
 
-| Classe                    | Precision | Recall | F1-Score | Suporte |
+| Epoch | Training Loss | Validation Loss |
+| ----- | ------------- | --------------- |
+| 1     | 2.7800        | 2.4204          |
+| 10    | 1.3309        | 1.3012          |
+| 20    | 1.0183        | 1.0025          |
+| 30    | 0.8183        | 0.8064          |
+
+> 🔍 The difference between the curves was small throughout training, indicating good generalization. Even after 30 epochs, both still show a downward trend.
+
+---
+
+### 📋 Results by Class (classification\_report)
+
+The model achieved a **total accuracy of 78%**, surpassing the baseline of 52.5% reported in the original article. Below are the main results by class:
+
+| Class                    | Precision | Recall | F1-Score | Support |
 |---------------------------|-----------|--------|----------|---------|
 | Brain and Neuro           | 0.80      | 0.97   | 0.88     | 522     |
 | Musculoskeletal           | 0.85      | 0.95   | 0.89     | 209     |
@@ -216,34 +216,34 @@ O modelo alcançou uma **acurácia total de 78%**, superando a baseline de 52.5%
 | Generalized               | 1.00      | 0.11   | 0.19     | 56      |
 | Abdomen                   | 1.00      | 0.10   | 0.17     | 42      |
 | Vascular                  | 0.82      | 0.27   | 0.41     | 66      |
-| Classes com suporte < 10  | 0.00      | 0.00   | 0.00     | -       |
-| **Acurácia total**        |           |        | **0.78** | 1653    |
-| **Média Macro**           | 0.47      | 0.36   | 0.37     |         |
-| **Média Ponderada**       | 0.76      | 0.78   | 0.74     |         |
+| Classes with support < 10 | 0.00      | 0.00   | 0.00     | -       |
+| **Total Accuracy**        |           |        | **0.78** | 1653    |
+| **Macro Average**         | 0.47      | 0.36   | 0.37     |         |
+| **Weighted Average**      | 0.76      | 0.78   | 0.74     |         |
 
-> 📌 **Análise:**
+> 📌 **Analysis:**
 >
-> - O modelo se saiu muito bem em classes com maior volume de dados (e.g., `Brain and Neuro`, `Musculoskeletal`).
-> - Classes com poucos exemplos tiveram desempenho muito baixo ou nulo, como esperado.
-> - A **média ponderada** mostra que, mesmo com desbalanceamento, o modelo foi eficaz na tarefa geral de classificação multimodal.
+> - The model performed very well on classes with higher data volume (e.g., `Brain and Neuro`, `Musculoskeletal`).
+> - Classes with few examples had very low or zero performance, as expected.
+> - The **weighted average** shows that, even with imbalance, the model was effective in the overall multimodal classification task.
 
 ---
 
-## 🎯 Projeto 03
+## 🎯 Project 03
 
-📅 **Prazo:** 11/06/2025  
+📅 **Deadline:** June 11, 2025  
 
-Atividade Extensionista no campus da USP - São Carlos (ICMC) com apresentação do pôster:  
-🖼️ **"Como as máquinas enxergam?"**  
+Extension Activity on the USP campus - São Carlos (ICMC) with poster presentation:  
+🖼️ **"How do machines see?"**  
 
-**Arquivo:** `posters/Poster Rede Neurais - Final.pptx`  
+**File:** `posters/Poster Rede Neurais - Final.pptx`  
 
-**Imagem do Pôster**  
+**Poster Image**  
 ![poster-image](assets/imagem_poster.png)  
 
 ---
 
-## 👥 Integrantes
+## 👥 Team Members
 
 - Brunna Quatrochi [🔗 LinkedIn](https://www.linkedin.com/in/brunna-quatrochi/)
 - Gabriela dos Santos Amaral 🐙 [GitHub](https://github.com/GabrielaSAmaral) | [🔗 LinkedIn](https://www.linkedin.com/in/gabriela-amaral-ga/)
